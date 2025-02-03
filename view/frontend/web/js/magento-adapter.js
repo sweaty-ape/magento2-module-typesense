@@ -1,5 +1,9 @@
 requirejs([
     'Develo_Typesense/js/typesense-adapter',
+    'algoliaAnalytics',
+    'algoliaBundle',
+    'suggestionsHtml',
+    'algoliaCommon',
     'domReady!'
 ], function (TypesenseInstantSearchAdapter) {
 
@@ -18,13 +22,15 @@ requirejs([
 
     var query_by = 'name,categories';
     if (typeof algoliaConfig.typesense_searchable !== 'undefined') {
-        query_by = algoliaConfig.typesense_searchable.products;
+        query_by = algoliaConfig.typesense_searchable.products + ',embedding';
     }
 
     window.typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
         server: algoliaConfig.typesense.config,
         additionalSearchParameters: {
-            query_by
+            query_by: query_by,
+            exclude_fields: 'embedding',
+            sort_by: '_text_match(buckets: 10):desc,ordered_qty:desc'
         }
     });
 

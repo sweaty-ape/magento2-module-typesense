@@ -83,7 +83,7 @@ class Client
                 $price['special_from_date'] = (string)($price['special_from_date'] ?? '');
                 $price['special_to_date'] = (string)($price['special_to_date'] ?? '');
 
-                $price['default'] = number_format($price['default'], 2);
+//                $price['default'] = number_format($price['default'], 2);
             }
 
             foreach ($facets as $facet) {

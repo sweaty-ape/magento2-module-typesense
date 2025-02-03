@@ -40,11 +40,12 @@ class AlgoliaHelperPlugin
     /**
      * Indexes data if config is set todo, will index into algolia or typesense or both
      */
-    public function aroundAddObjects(
+    public function aroundSaveObjects(
         \Algolia\AlgoliaSearch\Helper\AlgoliaHelper $subject,
         \Closure $proceed,
+        $indexName,
         $objects,
-        $indexName
+        $isPartialUpdate
     )
     {
         if ($this->configService->isEnabled()) {
@@ -132,12 +133,12 @@ class AlgoliaHelperPlugin
         return $result;
     }
 
-    public function aroundCopyQueryRules(        
+    public function aroundCopyQueryRules(
         \Algolia\AlgoliaSearch\Helper\AlgoliaHelper $subject,
         \Closure $proceed,
         $indexName,
         $objects
-        ){ 
+        ){
         if ($this->configService->isEnabled()) {
         $result = [];
         $indexMethod = $this->configService->getIndexMethod();
@@ -157,12 +158,12 @@ class AlgoliaHelperPlugin
     }
     return $result; }
 
-    public function aroundMoveIndex(        
+    public function aroundMoveIndex(
         \Algolia\AlgoliaSearch\Helper\AlgoliaHelper $subject,
         \Closure $proceed,
         $indexName,
         $objects
-        ){ 
+        ){
         if ($this->configService->isEnabled()) {
         $result = [];
         $indexMethod = $this->configService->getIndexMethod();
@@ -182,12 +183,12 @@ class AlgoliaHelperPlugin
     }
     return $result; }
 
-    public function aroundSetSettings(        
+    public function aroundSetSettings(
         \Algolia\AlgoliaSearch\Helper\AlgoliaHelper $subject,
         \Closure $proceed,
         $indexName,
         $objects
-        ){ 
+        ){
         if ($this->configService->isEnabled()) {
         $result = [];
         $indexMethod = $this->configService->getIndexMethod();
@@ -205,15 +206,15 @@ class AlgoliaHelperPlugin
     } else {
         $result = $proceed();
     }
-    return $result; 
+    return $result;
     }
 
-    public function aroundDeleteInactiveProducts(        
+    public function aroundDeleteInactiveProducts(
         \Algolia\AlgoliaSearch\Helper\AlgoliaHelper $subject,
         \Closure $proceed,
         $indexName,
         $objects
-    ){ 
+    ){
         die("here");
             if ($this->configService->isEnabled()) {
             $result = [];
@@ -232,7 +233,7 @@ class AlgoliaHelperPlugin
         } else {
             $result = $proceed();
         }
-        return $result; 
+        return $result;
     }
 
 }

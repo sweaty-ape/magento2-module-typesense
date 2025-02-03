@@ -202,6 +202,67 @@ class ConfigChangeHelper
                         'type' => 'string[]',
                         'facet' => in_array('sku', $facets),
                         'sort' => in_array('sku', $sortingAttributes)
+                    ],
+
+                    [
+                        'name' => 'categories_without_path',
+                        'type' => 'string[]'
+                    ],
+
+                    [
+                        'name' => 'ordered_qty',
+                        'type' => 'int32'
+                    ],
+
+                    [
+                        'name' => 'created_at',
+                        'type' => 'string'
+                    ],
+
+//                    [
+//                        'name' => 'in_stock',
+//                        'type' => 'int32'
+//                    ],
+
+                    [
+                        'name' => 'price',
+                        'type' => 'object',
+                        'facet' => true
+                    ],
+
+                    [
+                        'name' => 'price.AUD.default',
+                        'type' => 'float',
+                        'facet' => true
+                    ],
+
+                    [
+                        'name' => 'image_url',
+                        'type' => 'string'
+                    ],
+
+                    [
+                        'name' => 'thumbnail_url',
+                        'type' => 'string'
+                    ],
+
+                    [
+                        'name' => 'url',
+                        'type' => 'string'
+                    ],
+
+                    [
+                        'name' => 'embedding',
+                        'type' => 'float[]',
+                        'embed' => [
+                            'from' => [
+                                'name',
+                                'categories_without_path'
+                            ],
+                            'model_config' => [
+                                'model_name' => 'ts/all-MiniLM-L12-v2'
+                            ]
+                        ]
                     ]
                 ];
 
